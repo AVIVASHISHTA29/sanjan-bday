@@ -155,6 +155,7 @@ export default function App() {
   const [selectedMCQ, setSelectedMCQ] = useState<string>("");
   const [zoomRevealed, setZoomRevealed] = useState(false);
   const [candleLit, setCandleLit] = useState(true);
+  const [tilesFlipped, setTilesFlipped] = useState<boolean[]>([]);
 
   const next = () => {
     const nextStep = Math.min(step + 1, LEVELS.length - 1);
@@ -240,9 +241,34 @@ export default function App() {
           <>
             <div className="tiles-grid">
               {level.tiles.map((t, i) => (
-                <div className="tile" key={i}>
-                  <img src={t.img} alt={`tile-${i}`} />
-                  <div className="tile-caption">{t.caption}</div>
+                <div
+                  className={`tile-card ${tilesFlipped[i] ? "flipped" : ""}`}
+                  key={i}
+                  onClick={() =>
+                    setTilesFlipped((arr) => {
+                      const copy = [...arr];
+                      copy[i] = !copy[i];
+                      return copy;
+                    })
+                  }
+                >
+                  <div className="card-inner">
+                    <div className="card-front">
+                      <div className="polaroid">
+                        <div className="polaroid-image">
+                          <img src={t.img} alt={`tile-${i}`} />
+                        </div>
+                        <div className="polaroid-caption">
+                          <span className="date">{t.caption.split("—")[0]}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="card-back">
+                      <div className="message-content">
+                        <p className="message">{t.caption}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
