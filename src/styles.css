@@ -147,9 +147,10 @@ body {
 /* ---------- Emoji Cards ---------- */
 .emoji-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, auto));
   gap: 14px;
   margin-top: 12px;
+  align-items: start;
 }
 .emoji-card {
   border: 2px solid #7b1fa2;
@@ -159,6 +160,7 @@ body {
   padding: 12px;
   cursor: pointer;
   transition: transform 0.15s, background 0.15s;
+  align-self: start;
 }
 .emoji-card:hover {
   transform: scale(1.05);
