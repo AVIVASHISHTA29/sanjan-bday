@@ -6,12 +6,12 @@ import "./styles.css";
 
 const ASSETS = {
   victory: "https://placehold.co/600x400?text=Victory+Image",
-  tile1: "https://placehold.co/300x200?text=Goa+Trip",
-  tile2: "https://placehold.co/300x200?text=Sleepover",
-  tile3: "https://placehold.co/300x200?text=Matching+Fits",
-  tile4: "https://placehold.co/300x200?text=Coffee+Chaos",
-  tile5: "https://placehold.co/300x200?text=Coldplay+Concert",
-  tile6: "https://placehold.co/300x200?text=Birthday+Surprise",
+  tile1: "/assets/lvl3/Padhai meets.jpg",
+  tile2: "/assets/lvl3/Jaipur.jpg",
+  tile3: "/assets/lvl3/IMG-20230630-WA0054.jpeg",
+  tile4: "/assets/lvl3/Diwali party.jpg",
+  tile5: "/assets/lvl3/2.mp4",
+  tile6: "/assets/lvl3/1.MOV",
   zoomed: "/assets/zoom.jpeg",
   revealFull: "/assets/normal.jpeg",
 };
@@ -35,7 +35,7 @@ type Level = {
   title: string;
   subtitle?: string;
   emojiSets?: { emojis: string; caption: string; img?: string }[];
-  tiles?: { img: string; caption: string }[];
+  tiles?: { img: string; caption: string; isVideo?: boolean }[];
   question?: string;
   options?: string[];
   correct?: string;
@@ -82,20 +82,21 @@ const LEVELS: Level[] = [
     title: "3️⃣ Six Tiles of Memory 🖼️",
     subtitle: "Pick any tile to reveal the moment. Every choice = confetti.",
     tiles: [
-      { img: ASSETS.tile1, caption: "Goa Trip — sun, chaos, legends." },
+      { img: ASSETS.tile1, caption: "Padhai meets — study sessions and memories." },
       {
         img: ASSETS.tile2,
-        caption: "Sleepover — unhinged laughs, zero sleep.",
+        caption: "Jaipur — adventures and good times.",
       },
-      { img: ASSETS.tile3, caption: "Matching outfits — main characters." },
+      { img: ASSETS.tile3, caption: "Memory — captured moments together." },
       {
         img: ASSETS.tile4,
-        caption: "Great Coffee Chaos — ‘we’ll share’ (we didn’t).",
+        caption: "Diwali party — celebrations and joy.",
       },
-      { img: ASSETS.tile5, caption: "Coldplay Concert — love & loud singing!" },
+      { img: ASSETS.tile5, caption: "Video memory — special moments captured!", isVideo: true },
       {
         img: ASSETS.tile6,
-        caption: "Birthday Surprise — absolute golden memory.",
+        caption: "Video memory — more special moments!",
+        isVideo: true,
       },
     ],
   },
@@ -256,7 +257,21 @@ export default function App() {
                     <div className="card-front">
                       <div className="polaroid">
                         <div className="polaroid-image">
-                          <img src={t.img} alt={`tile-${i}`} />
+                          {t.isVideo ? (
+                            <video
+                              src={t.img}
+                              controls
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                              }}
+                            >
+                              Your browser does not support the video tag.
+                            </video>
+                          ) : (
+                            <img src={t.img} alt={`tile-${i}`} />
+                          )}
                         </div>
                         <div className="polaroid-caption">
                           <span className="date">{t.caption.split("—")[0]}</span>
