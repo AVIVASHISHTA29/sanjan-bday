@@ -508,6 +508,11 @@ body {
   box-shadow: 0 0 10px rgba(255, 235, 59, 0.6);
   transition: all 0.4s ease;
   border: 2px solid #ffeb3b;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .tile:hover {
