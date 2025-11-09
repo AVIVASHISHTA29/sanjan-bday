@@ -34,7 +34,7 @@ type Level = {
   kind: LevelKind;
   title: string;
   subtitle?: string;
-  emojiSets?: { emojis: string; caption: string; img?: string }[];
+  emojiSets?: { emojis: string; caption: string; img?: string; isVideo?: boolean }[];
   tiles?: { img: string; caption: string; isVideo?: boolean }[];
   question?: string;
   options?: string[];
@@ -63,17 +63,19 @@ const LEVELS: Level[] = [
       {
         emojis: "🧋📸😂☀️",
         caption: "That chaotic café day.",
-        img: "https://placehold.co/300x200?text=Café+Day",
+        img: "/assets/lvl2/Farre.jpg",
       },
       {
         emojis: "🎶💔🚗",
         caption: "The heartbreak drive playlist.",
-        img: "https://placehold.co/300x200?text=Drive+Playlist",
+        img: "/assets/lvl2/Lunch.mov",
+        isVideo: true,
       },
       {
         emojis: "🌸🍷📸✨",
         caption: "Aesthetic girls' night.",
-        img: "https://placehold.co/300x200?text=Girls+Night",
+        img: "/assets/lvl2/Two twoo tattooo.mov",
+        isVideo: true,
       },
     ],
   },
@@ -226,7 +228,27 @@ export default function App() {
                     {e.caption}
                   </div>
                   {emojiRevealed[i] && e.img && (
-                    <img src={e.img} alt={e.caption} className="emoji-image" />
+                    e.isVideo ? (
+                      <video
+                        src={e.img}
+                        controls
+                        className="emoji-image"
+                        style={{
+                          width: "100%",
+                          maxWidth: "280px",
+                          borderRadius: "8px",
+                          marginTop: "10px",
+                          border: "2px solid #7b1fa2",
+                          display: "block",
+                          marginLeft: "auto",
+                          marginRight: "auto",
+                        }}
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img src={e.img} alt={e.caption} className="emoji-image" />
+                    )
                   )}
                 </div>
               ))}
