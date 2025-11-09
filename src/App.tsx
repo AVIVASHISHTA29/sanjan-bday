@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import ComplimentGenerator from "./ComplimentGenerator";
 import FlappyBestie from "./Flappybestie";
 import ManifestationWheel from "./ManifestationWheel";
-import ComplimentGenerator from "./ComplimentGenerator";
 import "./styles.css";
 
 const ASSETS = {
-  victory: " ",
+  victory: "https://placehold.co/600x400?text=Victory+Image",
   tile1: "https://placehold.co/300x200?text=Goa+Trip",
   tile2: "https://placehold.co/300x200?text=Sleepover",
   tile3: "https://placehold.co/300x200?text=Matching+Fits",
@@ -34,7 +34,7 @@ type Level = {
   kind: LevelKind;
   title: string;
   subtitle?: string;
-  emojiSets?: { emojis: string; caption: string }[];
+  emojiSets?: { emojis: string; caption: string; img?: string }[];
   tiles?: { img: string; caption: string }[];
   question?: string;
   options?: string[];
@@ -60,9 +60,21 @@ const LEVELS: Level[] = [
     title: "2️⃣ Emoji Decode 💬",
     subtitle: "Every guess is right. Tap to reveal my caption for each.",
     emojiSets: [
-      { emojis: "🧋📸😂☀️", caption: "That chaotic café day." },
-      { emojis: "🎶💔🚗", caption: "The heartbreak drive playlist." },
-      { emojis: "🌸🍷📸✨", caption: "Aesthetic girls’ night." },
+      {
+        emojis: "🧋📸😂☀️",
+        caption: "That chaotic café day.",
+        img: "https://placehold.co/300x200?text=Café+Day",
+      },
+      {
+        emojis: "🎶💔🚗",
+        caption: "The heartbreak drive playlist.",
+        img: "https://placehold.co/300x200?text=Drive+Playlist",
+      },
+      {
+        emojis: "🌸🍷📸✨",
+        caption: "Aesthetic girls' night.",
+        img: "https://placehold.co/300x200?text=Girls+Night",
+      },
     ],
   },
   {
@@ -142,7 +154,7 @@ export default function App() {
   const [emojiRevealed, setEmojiRevealed] = useState<boolean[]>([]);
   const [selectedMCQ, setSelectedMCQ] = useState<string>("");
   const [zoomRevealed, setZoomRevealed] = useState(false);
-  const [candleLit, setCandleLit] = useState(false);
+  const [candleLit, setCandleLit] = useState(true);
 
   const next = () => {
     const nextStep = Math.min(step + 1, LEVELS.length - 1);
@@ -211,6 +223,9 @@ export default function App() {
                   <div className={`caption ${emojiRevealed[i] ? "show" : ""}`}>
                     {e.caption}
                   </div>
+                  {emojiRevealed[i] && e.img && (
+                    <img src={e.img} alt={e.caption} className="emoji-image" />
+                  )}
                 </div>
               ))}
             </div>
@@ -333,7 +348,11 @@ export default function App() {
               <em>{level.prompt}</em>
             </p>
             <div className="crossword-placeholder">
-              <p>🧩 (Crossword will go here!)</p>
+              <img
+                src="https://placehold.co/600x400?text=Crossword+Image+Placeholder"
+                alt="Crossword"
+                className="crossword-image"
+              />
             </div>
             <button className="btn next" onClick={next}>
               Done →
@@ -354,12 +373,14 @@ export default function App() {
         {/* CANDLE */}
         {level.kind === "candle" && (
           <>
-            <div className="candle" onClick={() => setCandleLit(true)}>
+            <div className="candle" onClick={() => setCandleLit(false)}>
               <div className={`flame ${candleLit ? "lit" : ""}`} />
               <div className="wick" />
               <div className="wax" />
             </div>
-            <p className="hint">Click the candle to light it, make a wish ✨</p>
+            <p className="hint">
+              Click the candle to blow it out, make a wish ✨
+            </p>
             <button className="btn next" onClick={next}>
               Next →
             </button>
