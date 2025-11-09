@@ -1,0 +1,554 @@
+/* ===== Friendship Arcade: Golden Glow Edition ===== */
+
+/* Headings → Press Start 2P (pixel arcade)
+   Body → Courier Prime (monospace) */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime:wght@400;700&display=swap");
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Courier Prime", monospace;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #4a148c 0%,
+    #2e006b 50%,
+    #1b003d 100%
+  );
+  color: #f8f7ff;
+  letter-spacing: 0.3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- Layout ---------- */
+.app {
+  max-width: 900px;
+  margin: 32px auto 80px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+/* ---------- Header (Golden Glow Edition) ---------- */
+.header {
+  text-align: center;
+  margin: 40px auto 28px;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 34px;
+  line-height: 1.5;
+  color: #ffeb3b; /* Golden yellow */
+  text-shadow: 0 0 4px #c19fff,
+    /* Light violet glow */ 2px 2px 2px rgba(140, 100, 200, 0.4); /* Thin subtle shadow */
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.tag {
+  font-family: "Courier Prime", monospace;
+  font-size: 15px;
+  color: #d6c3ff; /* Soft pastel lilac */
+  text-shadow: 0 0 4px rgba(180, 140, 255, 0.4);
+  text-align: center;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: rgba(26, 0, 54, 0.85);
+  border: 2px solid #6a1b9a;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.35);
+}
+
+/* ---------- Level Headings ---------- */
+.level-title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 20px;
+  color: #ffeb3b;
+  text-shadow: 0 0 4px #c19fff, 2px 2px 2px rgba(140, 100, 200, 0.4);
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle,
+.lead {
+  color: #d1c4e9;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: "Press Start 2P", monospace;
+  background: linear-gradient(90deg, #7b1fa2, #6200ea, #03a9f4);
+  color: #fff;
+  border: 2px solid #00e5ff;
+  border-radius: 8px;
+  padding: 12px 18px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px rgba(3, 169, 244, 0.5);
+  transition: all 0.2s;
+}
+.btn:hover {
+  background: linear-gradient(90deg, #03a9f4, #7b1fa2);
+  transform: translateY(-2px);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px dashed #7c4dff;
+  color: #f3e5f5;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+}
+
+/* ---------- Embeds ---------- */
+.embed {
+  width: 100%;
+  height: 520px;
+  border: 2px solid #7b1fa2;
+  border-radius: 12px;
+  margin-top: 12px;
+  box-shadow: 0 0 20px rgba(123, 31, 162, 0.4);
+}
+.embed.placeholder {
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  color: #d1c4e9;
+  padding: 24px;
+}
+
+/* ---------- Emoji Cards ---------- */
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+.emoji-card {
+  border: 2px solid #7b1fa2;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+.emoji-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.1);
+}
+.emoji {
+  font-size: 30px;
+}
+.caption {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  color: #fff9c4;
+  transition: all 0.2s;
+}
+.caption.show {
+  opacity: 1;
+  height: auto;
+  margin-top: 6px;
+}
+
+/* ---------- Tiles ---------- */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.tile {
+  border: 2px solid #7b1fa2;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+.tile img {
+  width: 100%;
+  display: block;
+}
+.tile-caption {
+  padding: 10px;
+  color: #ede7f6;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ---------- MCQ ---------- */
+.opt {
+  border: 2px solid #7b1fa2;
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 12px;
+}
+.opt.active,
+.opt:hover {
+  background: #7b1fa2;
+  border-color: #ffeb3b;
+}
+
+/* ---------- Treat Pills ---------- */
+.pill {
+  border: 2px solid #7b1fa2;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+}
+.pill.chosen {
+  background: linear-gradient(90deg, #ffeb3b, #ff4081);
+  color: #2e006b;
+  border-color: #ffeb3b;
+}
+
+/* ---------- Candle ---------- */
+.candle {
+  width: 90px;
+  height: 150px;
+  margin: 20px auto;
+  position: relative;
+  cursor: pointer;
+}
+.wax {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 110px;
+  background: #d1c4e9;
+  border-radius: 10px;
+  border: 2px solid #b39ddb;
+}
+.wick {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 16px;
+  background: #000;
+}
+.flame {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 26px;
+  background: radial-gradient(ellipse at center, #fff176 0%, #ff6f00 80%);
+  border-radius: 50% 50% 60% 60%;
+  opacity: 0.1;
+}
+.flame.lit {
+  opacity: 1;
+  animation: flicker 0.12s infinite alternate;
+}
+@keyframes flicker {
+  from {
+    transform: translateX(-50%) scale(1);
+  }
+  to {
+    transform: translateX(-50%) scale(1.08);
+  }
+}
+
+/* ---------- Final ---------- */
+.final {
+  text-align: center;
+  font-size: 14px;
+  color: #fffde7;
+  font-family: "Press Start 2P", monospace;
+}
+.victory {
+  width: 100%;
+  max-width: 640px;
+  border: 3px solid #ffeb3b;
+  border-radius: 14px;
+  margin-top: 14px;
+  box-shadow: 0 0 30px rgba(255, 235, 59, 0.5);
+}
+
+/* ---------- Footer ---------- */
+.foot {
+  position: sticky;
+  bottom: 0;
+  background: rgba(26, 0, 54, 0.9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  border-top: 2px solid #7b1fa2;
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+}
+.steps {
+  color: #b39ddb;
+}
+/* ---------- Flappy Bestie ---------- */
+/* =============== Dodge The Drama =============== */
+/* =============== Conquer The Chaos (Tile Version) =============== */
+.tiles-container {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  background: linear-gradient(180deg, #5b2ca0 0%, #2e006b 100%);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #ffeb3b;
+  text-align: center;
+  font-family: "Press Start 2P", monospace;
+}
+
+.tiles-heading {
+  font-size: 12px;
+  color: #ffeb3b;
+  text-shadow: 0 0 6px #b39ddb;
+  margin-bottom: 20px;
+}
+
+.tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.tile {
+  background: #ffeb3b;
+  color: #2e006b;
+  border-radius: 12px;
+  padding: 16px 10px;
+  cursor: pointer;
+  font-size: 10px;
+  box-shadow: 0 0 10px rgba(255, 235, 59, 0.6);
+  transition: all 0.4s ease;
+  border: 2px solid #ffeb3b;
+}
+
+.tile:hover {
+  transform: scale(1.05);
+  background: #fff176;
+}
+
+.tile.burst {
+  background: #7b1fa2;
+  color: #ffeb3b;
+  border: 2px solid #ffeb3b;
+  transform: scale(1.15);
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+.win-message {
+  margin-top: 30px;
+  color: #ffeb3b;
+  text-shadow: 0 0 8px #b39ddb;
+  font-size: 11px;
+  line-height: 1.6;
+  max-width: 80%;
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #ffeb3b 10%, transparent 10%),
+    radial-gradient(circle, #b39ddb 10%, transparent 10%),
+    radial-gradient(circle, #7b1fa2 10%, transparent 10%);
+  background-size: 20px 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.confetti.show {
+  opacity: 1;
+  animation: confettiMove 1.5s ease-in-out forwards;
+}
+@keyframes confettiMove {
+  from {
+    background-position: 0 0, 20px 20px, 40px 0;
+  }
+  to {
+    background-position: 0 200px, 20px 220px, 40px 200px;
+    opacity: 0;
+  }
+}
+/* ===================== Manifestation Wheel (Clean Inside Layout) ===================== */
+/* ===================== Manifestation Wheel (Text Inside Wedges) ===================== */
+.wheel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #5b2ca0, #2e006b 80%);
+  border-radius: 20px;
+  padding: 30px 20px;
+  box-shadow: 0 0 30px rgba(91, 44, 160, 0.6);
+  color: #ffeb3b;
+  text-align: center;
+  font-family: "Press Start 2P", monospace;
+}
+
+.wheel-canvas {
+  cursor: pointer;
+  border-radius: 50%;
+  border: 5px solid #ffeb3b;
+  box-shadow: 0 0 20px rgba(255, 235, 59, 0.4);
+  margin: 15px 0;
+}
+
+.hint {
+  font-size: 11px;
+  color: #ffeb3b;
+  opacity: 0.8;
+}
+
+.result-box {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 14px 20px;
+  border-radius: 12px;
+  color: #ffeb3b;
+  margin-top: 10px;
+  font-size: 12px;
+  width: 80%;
+  text-shadow: 0 0 4px #b39ddb;
+}
+.wheel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #5b2ca0, #2e006b 80%);
+  border-radius: 20px;
+  padding: 30px 20px;
+  box-shadow: 0 0 30px rgba(91, 44, 160, 0.6);
+  color: #ffeb3b;
+  text-align: center;
+  font-family: "Press Start 2P", monospace;
+}
+.wheel-canvas {
+  cursor: pointer;
+  border-radius: 50%;
+  border: 5px solid #ffeb3b;
+  box-shadow: 0 0 20px rgba(255, 235, 59, 0.4);
+  margin: 15px 0;
+}
+.hint {
+  font-size: 11px;
+  color: #ffeb3b;
+  opacity: 0.85;
+}
+.result-box {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 14px 20px;
+  border-radius: 12px;
+  color: #ffeb3b;
+  margin-top: 10px;
+  font-size: 12px;
+  width: 80%;
+  text-shadow: 0 0 4px #b39ddb;
+}
+/* ========================= MEMORY TILE GRID ========================= */
+.compliment-card {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.compliment {
+  font-size: 1.4rem;
+  font-family: "Courier Prime", monospace;
+  color: #fff9c4;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 25px auto;
+  width: 80%;
+  max-width: 600px;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: scale(1.05);
+}
+/* Floating Skip Button (Styled Same as .btn / .next) */
+/* Floating Skip Button styled same as Next */
+.skip-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #ff69b4, #ff85c1);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  z-index: 999;
+}
+
+.skip-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 16px rgba(255, 105, 180, 0.6);
+}
+
+.skip-btn:active {
+  transform: scale(0.97);
+}
