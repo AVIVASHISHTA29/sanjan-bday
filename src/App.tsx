@@ -5,7 +5,7 @@ import ManifestationWheel from "./ManifestationWheel";
 import "./styles.css";
 
 const ASSETS = {
-  victory: "https://placehold.co/600x400?text=Victory+Image",
+  victory: "/assets/victory.jpeg",
   tile1: "/assets/lvl3/Padhai meets.jpg",
   tile2: "/assets/lvl3/Jaipur.jpg",
   tile3: "/assets/lvl3/IMG-20230630-WA0054.jpeg",
