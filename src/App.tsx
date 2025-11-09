@@ -390,7 +390,7 @@ export default function App() {
             </p>
             <div className="crossword-placeholder">
               <img
-                src="https://placehold.co/600x400?text=Crossword+Image+Placeholder"
+                src="/assets/crossword.png"
                 alt="Crossword"
                 className="crossword-image"
               />
