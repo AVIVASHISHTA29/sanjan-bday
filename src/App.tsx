@@ -12,8 +12,8 @@ const ASSETS = {
   tile4: "https://placehold.co/300x200?text=Coffee+Chaos",
   tile5: "https://placehold.co/300x200?text=Coldplay+Concert",
   tile6: "https://placehold.co/300x200?text=Birthday+Surprise",
-  zoomed: "https://placehold.co/180x180?text=Zoomed+Hint",
-  revealFull: "https://placehold.co/600x350?text=Full+Photo+Reveal",
+  zoomed: "/assets/zoom.jpeg",
+  revealFull: "/assets/normal.jpeg",
 };
 
 type LevelKind =
