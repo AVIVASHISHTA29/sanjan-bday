@@ -31,7 +31,12 @@ export type Level = {
   kind: LevelKind;
   title: string;
   subtitle?: string;
-  emojiSets?: { emojis: string; caption: string; img?: string; isVideo?: boolean }[];
+  emojiSets?: {
+    emojis: string;
+    caption: string;
+    img?: string;
+    isVideo?: boolean;
+  }[];
   tiles?: { img: string; caption: string; isVideo?: boolean }[];
   question?: string;
   options?: string[];
@@ -84,7 +89,10 @@ export const LEVELS: Level[] = [
     title: "3️⃣ Six Tiles of Memory 🖼️",
     subtitle: "Pick any tile to reveal the moment. Every choice = confetti.",
     tiles: [
-      { img: ASSETS.tile1, caption: "Padhai meets — study sessions and memories." },
+      {
+        img: ASSETS.tile1,
+        caption: "Padhai meets — study sessions and memories.",
+      },
       {
         img: ASSETS.tile2,
         caption: "Jaipur — adventures and good times.",
@@ -94,7 +102,11 @@ export const LEVELS: Level[] = [
         img: ASSETS.tile4,
         caption: "Diwali party — celebrations and joy.",
       },
-      { img: ASSETS.tile5, caption: "Video memory — special moments captured!", isVideo: true },
+      {
+        img: ASSETS.tile5,
+        caption: "Video memory — special moments captured!",
+        isVideo: true,
+      },
       {
         img: ASSETS.tile6,
         caption: "Video memory — more special moments!",
@@ -150,4 +162,3 @@ export const LEVELS: Level[] = [
     subtitle: "You unlocked joy, chaos, and cupcakes. Happy Birthday, Sanj 💖",
   },
 ];
-
