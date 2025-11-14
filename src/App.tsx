@@ -37,7 +37,9 @@ export default function App() {
 
       <main className="card">
         <h2 className="level-title">{level.title}</h2>
-        {level.subtitle && <p className="subtitle">{level.subtitle}</p>}
+        {level.subtitle && !level.title.includes("8️⃣") && (
+          <p className="subtitle">{level.subtitle}</p>
+        )}
 
         {/* INTRO */}
         {level.kind === "intro" && (
@@ -81,8 +83,9 @@ export default function App() {
                   <div className={`caption ${emojiRevealed[i] ? "show" : ""}`}>
                     {e.caption}
                   </div>
-                  {emojiRevealed[i] && e.img && (
-                    e.isVideo ? (
+                  {emojiRevealed[i] &&
+                    e.img &&
+                    (e.isVideo ? (
                       <video
                         src={e.img}
                         controls
@@ -101,9 +104,12 @@ export default function App() {
                         Your browser does not support the video tag.
                       </video>
                     ) : (
-                      <img src={e.img} alt={e.caption} className="emoji-image" />
-                    )
-                  )}
+                      <img
+                        src={e.img}
+                        alt={e.caption}
+                        className="emoji-image"
+                      />
+                    ))}
                 </div>
               ))}
             </div>
@@ -150,7 +156,9 @@ export default function App() {
                           )}
                         </div>
                         <div className="polaroid-caption">
-                          <span className="date">{t.caption.split("—")[0]}</span>
+                          <span className="date">
+                            {t.caption.split("—")[0]}
+                          </span>
                         </div>
                       </div>
                     </div>
